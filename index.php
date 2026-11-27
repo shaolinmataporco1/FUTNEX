@@ -146,6 +146,46 @@ require __DIR__ . '/partials/header.php';
                   <strong><?= e($valorFora) ?></strong>
                 </div>
               <?php endforeach; ?>
+              <?php if (isset($resultado['escala_casa'], $resultado['escala_fora'])): ?>
+              <div class="escalacoes-resultado">
+                <div>
+                  <h4><?= e($resultado['casa']) ?> · <?= e($resultado['escala_casa']['formacao']) ?></h4>
+                  <ol>
+                    <?php foreach ($resultado['escala_casa']['titulares'] as $titular): ?>
+                      <li><?= e($titular) ?></li>
+                    <?php endforeach; ?>
+                  </ol>
+                  <strong class="titulo-elenco-completo">Elenco completo da partida</strong>
+                  <ol class="elenco-completo-resultado">
+                    <?php foreach ($resultado['escala_casa']['completo'] as $jogadorPartida): ?>
+                      <li class="<?= in_array($jogadorPartida, $resultado['escala_casa']['titulares'], true) ? 'titular-na-partida' : '' ?>">
+                        <?= e($jogadorPartida) ?>
+                        <?= in_array($jogadorPartida, $resultado['escala_casa']['titulares'], true) ? '<small>Titular</small>' : '<small>Reserva</small>' ?>
+                      </li>
+                    <?php endforeach; ?>
+                  </ol>
+                  <small><strong>Entraram:</strong> <?= e(implode(', ', $resultado['escala_casa']['substitutos'])) ?></small>
+                </div>
+                <div>
+                  <h4><?= e($resultado['fora']) ?> · <?= e($resultado['escala_fora']['formacao']) ?></h4>
+                  <ol>
+                    <?php foreach ($resultado['escala_fora']['titulares'] as $titular): ?>
+                      <li><?= e($titular) ?></li>
+                    <?php endforeach; ?>
+                  </ol>
+                  <strong class="titulo-elenco-completo">Elenco completo da partida</strong>
+                  <ol class="elenco-completo-resultado">
+                    <?php foreach ($resultado['escala_fora']['completo'] as $jogadorPartida): ?>
+                      <li class="<?= in_array($jogadorPartida, $resultado['escala_fora']['titulares'], true) ? 'titular-na-partida' : '' ?>">
+                        <?= e($jogadorPartida) ?>
+                        <?= in_array($jogadorPartida, $resultado['escala_fora']['titulares'], true) ? '<small>Titular</small>' : '<small>Reserva</small>' ?>
+                      </li>
+                    <?php endforeach; ?>
+                  </ol>
+                  <small><strong>Entraram:</strong> <?= e(implode(', ', $resultado['escala_fora']['substitutos'])) ?></small>
+                </div>
+              </div>
+              <?php endif; ?>
               <p class="nota-estatisticas">Fonte: ESPN · Dados oficiais da partida.</p>
             </div>
           </article>
@@ -156,16 +196,17 @@ require __DIR__ . '/partials/header.php';
       <div class="titulo-favoritos">
         <div>
           <span class="tag">Sua seleção</span>
-          <h3 id="titulo-favoritos">Partida favorita</h3>
+          <h3 id="titulo-favoritos">Simulador de apostas</h3>
         </div>
         <span id="quantidade-favoritos" class="quantidade-favoritos">0 favoritos</span>
       </div>
+      <p class="nota-estatisticas">Simulação demonstrativa: nenhuma aposta ou pagamento real é realizado.</p>
       <div id="favorito-selecionado" class="favorito-selecionado vazio-favorito">
         Marque uma estrela em uma partida para ver todas as informações aqui.
       </div>
       <form id="confirmar-simulacao" class="confirmar-simulacao">
         <div>
-          <h4>Confirmar valor</h4>
+          <h4>Simular aposta</h4>
         </div>
         <div id="resumo-confirmacao" class="resumo-confirmacao">
           Selecione uma partida favorita para conferir os times e as estatísticas.
@@ -183,9 +224,9 @@ require __DIR__ . '/partials/header.php';
           Valor em reais
           <input id="valor-simulacao" name="valor" type="number" min="1" max="500" step="0.01" value="50.00" required>
         </label>
-        <button type="submit" class="botao-confirmar-dinheiro">Confirmar dinheiro</button>
+        <button type="submit" class="botao-confirmar-dinheiro">Simular aposta</button>
         <p id="resultado-simulacao" class="resultado-simulacao" role="status" aria-live="polite">
-          Nenhum valor confirmado.
+          Nenhuma simulação realizada.
         </p>
       </form>
     </section>
@@ -215,7 +256,7 @@ require __DIR__ . '/partials/header.php';
           </div>
         <?php endforeach; ?>
       </div>
-      <p class="nota-estatisticas">Dados atualizados em 26/11/2026. Fonte: ESPN.</p>
+      <p class="nota-estatisticas">Dados atualizados em 27/11/2026. Fonte: ESPN.</p>
     </div>
   </div>
   <aside class="destaques">
@@ -679,7 +720,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const valorFormatado = valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
     const retorno = valor * mercadoSelecionado.cotacao;
     const retornoFormatado = retorno.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-    resultadoSimulacao.textContent = `Confirmação registrada: ${valorFormatado} · ${mercadoSelecionado.nome} · ${partida} · Retorno potencial ${retornoFormatado}`;
+    resultadoSimulacao.textContent = `Simulação: ${valorFormatado} · ${mercadoSelecionado.nome} · ${partida} · Retorno potencial ${retornoFormatado}`;
     resultadoSimulacao.className = 'resultado-simulacao sucesso';
   });
 

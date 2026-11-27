@@ -360,6 +360,53 @@ nav a.ativo { color: var(--verde-escuro); }
 }
 .painel-resultado > p:first-child { color: var(--cinza); font-size: 12px; }
 .resultado-estatistica { background: var(--branco); padding: 0 8px; }
+.escalacoes-resultado {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 10px;
+}
+.escalacoes-resultado > div {
+  padding: 10px;
+  border: 1px solid #dfe6df;
+  border-radius: 8px;
+  background: var(--branco);
+}
+.escalacoes-resultado h4 { margin: 0 0 6px; font-size: 12px; }
+.escalacoes-resultado ol {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2px 8px;
+  margin: 0;
+  padding-left: 18px;
+  color: var(--cinza);
+  font-size: 11px;
+}
+.escalacoes-resultado small {
+  display: block;
+  margin-top: 8px;
+  color: var(--cinza);
+  font-size: 10px;
+  line-height: 1.45;
+}
+.titulo-elenco-completo {
+  display: block;
+  margin-top: 10px;
+  color: var(--preto);
+  font-size: 11px;
+}
+.elenco-completo-resultado {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 5px !important;
+  list-style-position: inside;
+}
+.elenco-completo-resultado li small {
+  display: inline;
+  margin: 0 0 0 4px;
+  color: var(--verde-escuro);
+  font-weight: 900;
+}
 
 .favoritos-partidas {
   margin-top: 24px;
@@ -817,6 +864,91 @@ nav a.ativo { color: var(--verde-escuro); }
   color: var(--verde-escuro);
   font-size: 11px;
 }
+.dialogo-time {
+  width: min(900px, calc(100vw - 32px));
+  max-height: calc(100vh - 32px);
+  padding: 0;
+  overflow: auto;
+  border: 1px solid #dfe6df;
+  border-radius: 12px;
+  background: var(--branco);
+  color: var(--preto);
+  box-shadow: 0 24px 70px rgba(16, 21, 16, .28);
+}
+.dialogo-time::backdrop { background: rgba(16, 21, 16, .58); }
+.cabecalho-dialogo-time {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 20px;
+  border-bottom: 1px solid #dde4dd;
+  background: var(--branco);
+}
+.cabecalho-dialogo-time h2 { margin: 0; }
+.fechar-dialogo-time {
+  padding: 8px 11px;
+  border: 1px solid #dfe6df;
+  border-radius: 6px;
+  background: var(--branco);
+  color: var(--verde-escuro);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 900;
+  cursor: pointer;
+}
+#conteudo-dialogo-time { padding: 20px; }
+#conteudo-dialogo-time .painel-historia-time {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.estatisticas-time,
+.escala-time {
+  grid-column: 1 / -1;
+  padding-top: 10px;
+  border-top: 1px solid #dde4dd;
+}
+.grade-estatisticas-time {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 7px;
+  margin-top: 8px;
+}
+.grade-estatisticas-time span {
+  display: grid;
+  gap: 2px;
+  padding: 8px;
+  border-radius: 6px;
+  background: var(--fundo);
+  color: var(--cinza);
+  text-align: center;
+  font-size: 10px;
+}
+.grade-estatisticas-time strong { color: var(--preto); font-size: 14px; }
+.escala-time ul {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 4px 12px;
+  margin-top: 8px;
+  padding: 0;
+  list-style: none;
+}
+.escala-time li {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  color: var(--preto);
+  font-size: 12px;
+}
+.escala-time li strong { color: var(--verde-escuro); }
+.escala-time li small { color: var(--cinza); }
+.estatisticas-time p,
+.escala-time p { color: var(--cinza); font-size: 12px; }
 .historico-clubes { margin: 14px 0; text-align: left; }
 .historico-clubes ol { margin: 6px 0 0; padding-left: 20px; color: var(--cinza); }
 .historico-clubes li { margin: 4px 0; }
@@ -962,5 +1094,8 @@ body.tema-escuro {
   .confirmar-simulacao { grid-template-columns: 1fr; align-items: stretch; }
   .estatisticas-confirmacao { grid-template-columns: 1fr; }
   .mercados-aposta { grid-template-columns: 1fr; }
+  .grade-estatisticas-time,
+  .escala-time ul,
+  .escalacoes-resultado { grid-template-columns: 1fr; }
   .resultado-simulacao { grid-column: auto; }
 }

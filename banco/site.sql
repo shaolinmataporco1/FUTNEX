@@ -96,6 +96,8 @@ INSERT IGNORE INTO times (nome,cidade,estado,fundacao) VALUES
 ('América Mineiro','Belo Horizonte','MG',1912),
 ('Chapecoense','Chapecó','SC',1973);
 
+UPDATE times SET nome='Vasco da Gama' WHERE nome='Vasco da Grama';
+
 INSERT IGNORE INTO times (nome,cidade,estado,fundacao) VALUES
 ('Barcelona','Barcelona','ES',1899),
 ('Paris Saint-Germain','Paris','FR',1970),
